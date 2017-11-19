@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Darwin</title>
+    <script src="assets/libs/angular.min.js"></script>
+     <link rel="stylesheet" href="assets/bootstrap-3.0.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/stylesheets/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/stylesheets/main.css">
+       
+       <style>
+    input[type=text] {
+    width: 230px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url(assets/image/search.jpg);
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+    width: 100%;}</style>
+        
+        
+        <script>
+         var app= angular.module("myapp",[]);
+         app.factory("myfactory",()=>{
+            var obj={
+                add(){
+                var product={
+                    "FOOTWEAR":[{Name:"Puma",Price:"1000",Images:"assets/image/foot1.jpg"},{Name:"Nike",Price:"1500",Images:"assets/image/foot2.jpg"},{Name:"Nike",Price:"2000",Images:"assets/image/foot3.jpg"}],
+                    
+                     "ELECTRONICS":[{Name:"APPLE",Price:"10000",Images:"assets/image/elect1.jpg"},{Name:"SONY",Price:"15000",Images:"assets/image/elect2.jpg"},{Name:"LG",Price:"2000",Images:"assets/image/elect3.jpg"}],
+                    
+                     "WATCH":[{Name:"TIMEX",Price:"1000",Images:"assets/image/watch1.jpg"},{Name:"RADO",Price:"25000",Images:"assets/image/watch2.jpeg"},{Name:"FASTRACK",Price:"2000",Images:"assets/image/watch3.jpg"}],
+                    
+                     "BOOKS":[{Name:"NCERT",Price:"200",Images:"assets/image/book1.jpg"},{Name:"Nike",Price:"150",Images:"assets/image/book2.jpg"},{Name:"Nike",Price:"280",Images:"assets/image/book3.jpg"}],
+                    
+                    "clothes":[{Name:"Puma",Price:"3000",Images:"assets/image/dress1.jpg"},{Name:"XLS",Price:"2000",Images:"assets/image/dress2.jpg"}, {Name:"Nike",Price:"4000",Images:"assets/image/dress3.jpg"}]}
+                
+                return product;
+                },
+                    
+                shoeList(){
+                    var a= this.add().FOOTWEAR;
+                    return a;
+                },
+                
+                electronicsList(){
+                    var a= this.add().ELECTRONICS;
+                    return a;
+                },
+                watchList(){
+                    var a= this.add().WATCH;
+                    return a;
+                },
+                bookList(){
+                    var a= this.add().BOOKS;
+                    return a;
+                },
+                    
+                clothList(){
+                    var b=this.add().clothes;
+                    return b;
+                }
+            } 
+            return obj;
+         });
+         
+         app.controller("myctrl",($scope,myfactory)=>{
+                $scope.shoeList=()=>{
+                    $scope.product = myfactory.shoeList();
+                }
+                
+                $scope.electronicsList=()=>{
+                    $scope.product = myfactory.electronicsList();
+                }
+                $scope.watchList=()=>{
+                    $scope.product = myfactory.watchList();
+                }
+                $scope.bookList=()=>{
+                    $scope.product = myfactory.bookList();
+                }
+                $scope.clothList=()=>{
+                    $scope.product = myfactory.clothList();
+                }
+         });
+    </script>
+</head>
+<body ng-app="myapp" ng-controller="myctrl">
+       
+       <div id="container">
+       <div id="header">
+           <div class="row">
+               
+               <div class="col-md-4">
+                   <div class="search">
+                      
+                       <form>
+  <input type="text" name="search" placeholder="Search for products.....">
+</form>
+                   </div>
+               </div>
+               
+               <div class="col-md-4">
+                   <div class="logo">
+                   <img src="assets/image/logo.jpg" alt="logo"></div>
+               </div>
+               
+               <div class="col-md-4">
+                   <div class="list">
+                       <ul>
+                           <li><a href="#"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a></li>
+                           <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+                           <li><a href="#"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
+                       </ul>
+                   </div>
+               </div>
+               
+           </div>
+           <hr>
+       </div>
+       
+       <div id="navigation">
+           <nav class="navbar navbar-inverse">
+           <div class="container-fluid">
+           <div class="navbar-header">
+           <div class="dropdown">        
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"> <a class="navbar-brand" href="products.html">CATEGORIES</a>
+    
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+     
+      <li><a href="products.html">ELECTRONICS</a></li>
+      <li><a href="#">FOOTWEAR</a></li>
+      <li><a href="#">WATCHES</a></li>
+      <li><a href="#">DRESSES</a></li>
+       <li><a href="#">BOOKS</a></li>
+    </ul>
+  </div>
+         
+          
+      </div>
+     <ul class="nav navbar-nav">
+      <li class="active"><a href="index.html">HOME</a></li>
+      <li><a href="#">MEN</a></li>
+      <li><a href="#">WOMEN</a></li>
+      <li><a href="#">GIFTS</a></li>
+       <li><a href="#">LOOKBOOK</a></li>
+        <li><a href="#">BLOG</a></li>
+    </ul>
+  </div>
+</nav>
+       </div>
+       
+  <!--     filter by product-->
+        <button ng-click="shoeList()">FOOTWEAR</button>
+        <button ng-click="electronicsList()">ELECTRONICS</button>
+        <button ng-click="watchList()">WATCHES</button>
+        <button ng-click="bookList()">BOOKS</button>
+       <button ng-click="clothList()">CLOTHES</button>
+       <p><input type="text" ng-model="Price"  placeholder="search "/></p>
+        
+        
+        <div ng-repeat="i in product | filter:Price | orderBy:'Name'">
+     {{i.Name}}
+      
+         <img ng-src="{{i.Images}}"  width="200" height="200">
+          Price:{{i.Price}}
+           </div>    
+       
+    </div>
+</body>
+</html>
